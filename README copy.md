@@ -1,12 +1,3 @@
-# quarantine-js
-
-A little proof of concept SPA framework I put together in quarantine
-
-
-## Blog post
-
-______________________
-
 # My SPA
 
 Cole Hollant
@@ -15,7 +6,7 @@ Cole Hollant
 
 Messing around with routing / DOM-manipulation while I'm in quarantine
 
-______________________
+____________________
 
 I'd say I'm mostly a Vue and Python developer these days. I love JS, but I'm relatively new to it, and I wouldn't consider myself an expert by any means. I can often get the job done, and I have my theories as to what is going on under the hood—some might even think they're coherent. Regardless, the web is so far along that it's rare to jump right in to JS without one of the big-league frameworks (React, Vue, Angular, even Svelte). I had *first* tried Angular, and I did without ever having written a `div`. I was stuck in academic computer science mode, which doesn't lend itself to much in terms of products; I had some concepts of programming—hell, I thought I was pretty good at it—but, there was something about all those angle-brackets, the jungle of files, and the back and forth with the CLI that I found completely unapproachable. I ended up dropping it and focusing on Flutter (cross-platform mobile apps), which I think was the perfect platform to transition between my Java-heavy education and the new world of UI development.
 

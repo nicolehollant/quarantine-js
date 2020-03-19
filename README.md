@@ -2,6 +2,7 @@
 
 A little proof of concept SPA framework I put together in quarantine
 
+[deployed on my site](https://misc.colehollant.com/myspa/#/home)
 
 ## Blog post
 

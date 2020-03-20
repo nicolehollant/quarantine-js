@@ -1,16 +1,17 @@
 const clicker = (props = {}) => new Elem({
-  classes: ['bg-gray-100', 'flex', 'flex-col', 'border', 'border-gray-400', 'rounded-lg', 'w-48', 'mx-auto', 'my-4', 'p-4', 'justify-around', 'items-center'],
+  classes: 'my-4 mx-auto',
   state: {
     count: props.count || 0,
   },
   children: (state) => [
     {
       id: 'count',
-      classes: ['text-green-700', 'font-semibold'],
+      classes: 'text-green-800 font-semibold',
       content: `Count: ${state.count}`,
     },
     {
       tag: 'button',
+      classes: 'mt-2 px-2 py-1 rounded-lg font-semibold bg-green-300 focus:outline-none focus:shadow-outline',
       content: props.content || "click me!",
       events: {
         click: () => {

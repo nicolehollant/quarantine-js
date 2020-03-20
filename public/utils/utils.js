@@ -15,7 +15,7 @@ function addText(text, el) {
 }
 
 function addClasses(classList, el) {
-  el.classList.add(...classList)
+  el.classList.add(...classList.filter(e => e !== ''))
 }
 
 /**
@@ -44,7 +44,8 @@ class Elem {
     this.mounted = mounted || doNothing
   }
   injectAttrs(el) {
-    if(this.classes.length > 0) addClasses(this.classes, el)
+    if(typeof this.classes === 'string') addClasses(this.classes.split(/\s+/g), el)
+    else if(this.classes.length > 0) addClasses(this.classes, el)
     if(this.id) el.id = this.id
     if(this.content) addText(this.content, el)
     if(this.events) {
@@ -84,7 +85,7 @@ class HashRouter {
     this.routes = routes || []
 
     const errorComponent = new Elem({ 
-      classes: ['text-xl', 'text-orange-700', 'font-semibold', 'm-8'],
+      classes: ['error-page'],
       content: 'No component for the current route'
     })
     let component = this.getRoute()
@@ -131,28 +132,32 @@ class SvgElem extends Elem {
 }
 
 class Sketch {
-  constructor({root, children, classes, state}) {
+  constructor({root, children, classes, state, stationary}) {
     this.root = root
     this.children = children || []
     this.classes = classes || []
     this.state = state || {}
-    if(!this.state.width) this.state.width = 10
-    if(!this.state.height) this.state.height = 10
+    this.stationary = stationary || false
     let rootEl = this.root
     if(typeof this.root === 'string')
       rootEl = document.getElementById(this.root)
     const svgNS = "http://www.w3.org/2000/svg";
     this.svgRoot = document.createElementNS(svgNS, "svg");
     this.svgRoot.setAttribute('xmlns', svgNS)
-    this.svgRoot.setAttribute('viewBox', `0 0 ${this.state.width} ${this.state.height}`)
     if(this.classes.length > 0) addClasses(this.classes, this.svgRoot)
     rootEl.appendChild(this.svgRoot)
+    if(!this.state.width) this.state.width = this.svgRoot.clientWidth || window.innerWidth
+    if(!this.state.height) this.state.height = this.svgRoot.clientHeight || window.innerHeight
+    this.svgRoot.setAttribute('viewBox', `0 0 ${this.state.width} ${this.state.height}`)
     if (typeof this.children !== 'function') this.children = () => this.children
-    this.animate = () => {
-      this.render()
-      requestAnimationFrame(this.animate)
+    if (this.stationary) this.render()
+    else {
+      this.animate = () => {
+        this.render()
+        requestAnimationFrame(this.animate)
+      }
+      this.animate()
     }
-    this.animate()
   }
   render() {
     this.svgRoot.innerHTML = ''
@@ -162,7 +167,7 @@ class Sketch {
   }
 }
 
-function circle(x, y, r, {fill, stroke, weight, classes}={}) {
+function circle(x, y, r, {fill, stroke, weight, classes, events}={}) {
   if(!fill) fill = 'currentColor'
   if(!stroke) stroke = 'none'
   if(!weight) weight = 'none'
@@ -302,8 +307,25 @@ function text(text, x, y, {fill, fontSize, fontWeight, classes}={}) {
   })
 }
 
+function image(href, {x, y, width, height, classes}={}) {
+  const properties = { href }
+  if(!classes) classes = []
+  if(width !== undefined) properties.width = width
+  if(height !== undefined) properties.height = height
+  if(x !== undefined) properties.x = x
+  if(y !== undefined) properties.y = y
+
+  return new SvgElem({
+    tag: 'image',
+    classes,
+    properties,
+  })
+}
+
+
+
 const rand = (max=1, min=0) => (Math.random() * max) + min
 const randInt = (max=1, min=0) => Math.floor(Math.random() * max) + min
 
 const randVal = () => Math.floor(Math.random() * 255)
-const randomColor = () => `rgb(${randVal()}, ${randVal()}, ${randVal()})`
+const randomColor = (alpha=1) => `rgba(${randVal()}, ${randVal()}, ${randVal()}, ${alpha})`

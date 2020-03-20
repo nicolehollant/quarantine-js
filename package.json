@@ -1,10 +1,28 @@
 {
-  "name": "my-spa",
+  "name": "quarantine-js",
   "version": "1.0.0",
-  "main": "main.js",
+  "repository": "git@github.com:colehollant/quarantine-js.git",
+  "author": "Cole Hollant <coleghollant@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "serve": "cross-env NODE_ENV=development node build.js; concurrently \"postcss public/tailwind.css -o public/build/tailwind.css --watch\"  \"live-server ./public\"",
+    "development": "cross-env NODE_ENV=development node build.js; postcss public/tailwind.css -o public/build/tailwind.css",
+    "build": "cross-env NODE_ENV=production concurrently \"postcss public/tailwind.css -o public/build/tailwind.css\" \"node build.js\"",
+    "start": "yarn run serve"
+  },
   "dependencies": {
+    "autoprefixer": "^9.5.1",
     "express": "^4.17.1",
-    "glob": "^7.1.6"
+    "tailwindcss": "^1.0"
+  },
+  "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^1.2.0",
+    "concurrently": "^4.1.0",
+    "cross-env": "^5.2.0",
+    "cssnano": "^4.1.10",
+    "gulp": "^4.0.2",
+    "live-server": "^1.2.1",
+    "postcss-cli": "^6.1.2",
+    "cheerio": "^1.0.0-rc.3"
   }
 }

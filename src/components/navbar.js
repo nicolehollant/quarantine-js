@@ -9,7 +9,7 @@ const navlink = (content, name) => ({
 
 const navbar = new Elem({
   tag: 'div',
-  classes: ['w-full', 'bg-gray-400', 'text-gray-900', 'font-medium'],
+  classes: ['w-full', 'bg-gray-400', 'text-gray-900', 'font-medium', 'z-10', 'relative'],
   children: [
     {
       classes: ['max-w-3xl', 'flex', 'justify-around', 'items-center', 'm-auto', 'p-4'],
@@ -17,6 +17,7 @@ const navbar = new Elem({
         navlink('Home', '/home'),
         navlink('About', '/about'),
         navlink('Contact', '/contact'),
+        navlink('Sketch', '/sketch'),
       ]
     }
   ]

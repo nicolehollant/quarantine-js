@@ -7,6 +7,7 @@ window.onload = () => {
     { route: '/', redirect: '/home' },
     { route: '/home', component: home },
     { route: '/about', component: about },
+    { route: '/sketch', component: sketch },
     { route: '*', component: notFound },
   ]
   

@@ -10,7 +10,7 @@ should be able to
 
 ```sh
 yarn # or npm i
-yarn serve
+yarn serve # or npm run serve
 ```
 
 or just open `index.html` in your browser so long as all scripts are attached 😊
@@ -22,6 +22,11 @@ yarn build # or npm run build
 ```
 
 all this really does is attach the scripts in `public/**/*.js` to `public/index.html`
+
+## Examples 👩‍💻
+
+- [svg-processing](https://spaces.colehollant.com/svg-processing/index.html#/home)
+- [default app](https://spaces.colehollant.com/quarantine-js-default/index.html#/home)
 
 # Documentation 📖
 
